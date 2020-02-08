@@ -8,3 +8,10 @@ class campaign(models.Model):
     img=models.ImageField(upload_to='photo')
     desc=models.TextField()
     
+
+class donater(models.Model):
+    name=models.CharField(max_length=100)
+    address=models.CharField(max_length=100)
+    phone_no=models.PositiveIntegerField()
+    blood_grp=models.TextField()
+    
