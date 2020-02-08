@@ -1,0 +1,50 @@
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  
+  <div id="container" style="width: 75%;" >
+    <canvas id="myChart1" width="20" height="10" ></canvas>
+
+  </div>
+<form action="/getfile/" method ="POST">
+    {% csrf_token %}
+    <input type="submit" value="Get CSV File Here">
+</form>
+<script>
+var ctx = document.getElementById('myChart1').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['O+ve','O-ve','B+ve','others'],
+        datasets: [{
+            label: '# of Votes',
+            data: {{setss}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+              
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+               
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: { 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
