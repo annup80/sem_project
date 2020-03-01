@@ -46,4 +46,23 @@ def barchart(request):
             f=f+1
     return render(request, 'csv.html', {'setss':[c,d,e,f]})
     
-       
+ def upload(request):
+    if request.method=='POST':
+        Camp_name=request.POST['camp_name']
+        Venue=request.POST['venue']
+        datetime=request.POST['datetime']
+        file1=request.FILES['img']
+        desc=request.POST['desc']
+
+        Campaign=campaign.objects.create(camp_name=Camp_name , venue=Venue , time=datetime , img=file1 , desc=desc )
+        Campaign.save()
+        print( 'campaign created')
+        return redirect('/upload/')
+    else:
+        return render ( request, 'upload.html')
+
+def upload_fetch(request):
+
+    upls=campaign.objects.all()
+    return render (request, 'upload.html', {'upls':upls})
+
